@@ -48,8 +48,8 @@ export default function Home() {
         <div className="container">
           <h2 className="about__title">¿QUÉ ES ROOM176?</h2>
           <article className="story story--myst">
-            <p><b>ROOM176</b> aspira a ser un simulador de gestión de campaña centrado en un candidato y su equipo.
-            El proyecto está en una fase muy temprana.</p>
+            <p><b>ROOM176</b> aspira a ser un simulador de gestión de campaña centrado en un candidato y su equipo.</p>
+            <p>El proyecto está en una fase muy temprana de desarrollo.</p>
           </article>
 
           <div className="about__cta">
