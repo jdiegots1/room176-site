@@ -115,15 +115,19 @@ body{ margin:0; background:var(--bg); color:var(--fg); }
   position:relative; z-index:2; text-align:center; padding:16px; opacity:.7; font-size:.9rem;
 }
 
-/* ===== Fade-in solo para título y texto ===== */
+/* fade-in ya existente; lo reutilizamos para cada cambio (key=index) */
 @keyframes fadeUp {
-  from { opacity:0; transform: translateY(8px); }
+  from { opacity:0; transform: translateY(6px); }
   to   { opacity:1; transform: translateY(0); }
 }
 .fade-in{ opacity:0; animation: fadeUp .8s ease-out forwards; }
 .delay-0{ animation-delay: .05s; }
 .delay-1{ animation-delay: .25s; }
 
+/* opcional: transición aún más sutil para el teaser (extra) */
+@media (prefers-reduced-motion: no-preference){
+  .teaser { transition: opacity .5s ease; }
+}
 /* Accesibilidad: reducir movimiento */
 @media (prefers-reduced-motion: reduce){
   .fade-in{ animation:none; opacity:1; transform:none; }
@@ -206,3 +210,12 @@ html { scroll-behavior: smooth; }
 
 /* Mejor anclaje al hacer scroll (si tienes topbar fija, ajusta el margen) */
 #about{ scroll-margin-top: 80px; }
+
+/* teaser minimal (sin recuadro, centrado) */
+.teaser{
+  margin: 6px 0 2px;
+  font-size: clamp(16px, 2.2vw, 22px);
+  letter-spacing: .2px;
+  opacity: .92;
+}
+
