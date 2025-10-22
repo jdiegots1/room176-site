@@ -1,0 +1,39 @@
+:root{
+  --bg:#0C1220;
+  --fg:#EAEAEA;
+  --acc:#E5B22E;
+  --panel:rgba(255,255,255,.06);
+  --panel-b:rgba(255,255,255,.12);
+}
+
+/* Roboto auto-alojada vía next/font (usa la variable) */
+html{ font-family: var(--font-roboto), system-ui, -apple-system, Segoe UI, Arial, sans-serif; }
+*{ box-sizing:border-box }
+
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  min-height:100dvh; display:grid; place-items:center;
+}
+
+.wrap{ width:100%; padding:24px; }
+
+.card{
+  max-width:820px;
+  margin-inline:auto;
+  padding:40px 32px;
+  background:var(--panel);
+  border:1px solid var(--panel-b);
+  border-radius:20px;
+  backdrop-filter: blur(8px);
+}
+
+h1{ margin:0 0 16px; font-weight:700; letter-spacing:.4px }
+p{ opacity:.92; line-height:1.7 }
+
+.btn{
+  display:inline-block; margin-top:20px;
+  padding:12px 18px; border-radius:10px;
+  background:var(--acc); color:#0C1220; text-decoration:none; font-weight:700;
+}
+
+footer{ margin-top:18px; text-align:center; opacity:.7; font-size:.9rem }
