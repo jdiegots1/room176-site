@@ -1,20 +1,20 @@
 'use client';
 
-import {useEffect, useState} from 'react';
-
-const LINES = [
-  'Donde se deciden mayorías.',
-  'Cuando el mapa se queda quieto.',
-  'Un escaño cambia un país.',
-  'Próximamente.'
-];
+import {useEffect, useRef, useState} from 'react';
 
 export default function Home() {
-  const [i, setI] = useState(0);
+  const aboutRef = useRef<HTMLElement | null>(null);
+  const [aboutVisible, setAboutVisible] = useState(false);
 
   useEffect(() => {
-    const id = setInterval(() => setI((n) => (n + 1) % LINES.length), 3600);
-    return () => clearInterval(id);
+    const el = aboutRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setAboutVisible(entry.isIntersecting),
+      { threshold: 0.18 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   return (
@@ -26,26 +26,41 @@ export default function Home() {
         <a className="brand" href="/">
           <span className="brand-room">ROOM</span><span className="brand-176">176</span>
         </a>
-        {/* nav mínimo (opcional): deja solo devlog si quieres
-        <nav className="nav">
-          <a href="/devlog">Devlog</a>
-        </nav>
-        */}
+        {/* nav vacío por ahora */}
       </header>
 
+      {/* HERO centrado con PRÓXIMAMENTE */}
       <section className="center">
         <h1 className="logo-xl fade-in delay-0">
           <span className="room">ROOM</span><span className="n176">176</span>
         </h1>
+        <p className="coming fade-in delay-1">PRÓXIMAMENTE</p>
+      </section>
 
-        {/* teaser rotatorio: cambia cada 3.6s y se desvanece */}
-        <p key={i} className="teaser fade-in delay-1" aria-live="polite">
-          {LINES[i]}
-        </p>
+      {/* SECCIÓN: ¿QUÉ ES ROOM176? (aparece al hacer scroll) */}
+      <section
+        id="about"
+        ref={aboutRef}
+        className={`about reveal ${aboutVisible ? 'is-visible' : ''}`}
+      >
+        <div className="container">
+          <h2 className="about__title">¿QUÉ ES ROOM176?</h2>
+          <article className="story story--myst">
+            <p>
+              Un proyecto independiente de simulación política en desarrollo. Construido paso a paso,
+              con la comunidad, y con el foco en campañas, escaños y pactos.
+            </p>
+            <p>
+              Ligero, serio y humilde: primero el fundamento, luego las palabras. Más, muy pronto.
+            </p>
+          </article>
 
-        <div className="pills">
-          <span className="pill">En desarrollo</span>
-          <span className="pill pill--muted">Escenario oficial: España 2027</span>
+          {/* Botón DEVLOG (estilo “pill” sin borde) */}
+          <div className="about__cta">
+            <a className="devlog-btn" href="/devlog" aria-label="Abrir Devlog">
+              DEVLOG
+            </a>
+          </div>
         </div>
       </section>
 
