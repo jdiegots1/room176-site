@@ -72,21 +72,32 @@ body{ margin:0; background:var(--bg); color:var(--fg); }
   font-size: clamp(16px, 2.2vw, 22px);
 }
 
-/* Story card (texto narrativo) */
+/* Story (centrado y justificado, sin recuadro) */
 .story{
-  max-width:min(980px, 92vw);
-  padding:28px 26px;
-  margin-inline:auto;
-  background:var(--panel);
-  border:1px solid var(--panel-b);
-  border-radius:16px;
-  backdrop-filter: blur(6px);
-  text-align:left;
-  line-height:1.7;
-  opacity:.96;
+  max-width: min(980px, 92vw);
+  margin: 0 auto;              /* centra el bloque en la página */
+  padding: 0 6px;              /* un pelín de aire lateral */
+  line-height: 1.8;
+  text-align: justify;         /* justifica el texto */
+  text-justify: inter-word;    /* mejor distribución de espacios */
+  hyphens: auto;               /* guiones automáticos donde aplique */
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+
+  /* limpiamos cualquier estilo de “caja” previo */
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  backdrop-filter: none !important;
+  opacity: .96;
 }
-.story p{ margin:0 0 10px; }
-.story p:last-child{ margin-bottom:0; }
+
+.story p{
+  margin: 0 0 12px;
+}
+.story p:last-child{
+  margin-bottom: 0;
+}
 
 /* Pills */
 .pills{
