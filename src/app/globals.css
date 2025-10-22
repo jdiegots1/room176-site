@@ -15,6 +15,98 @@ body{
   min-height:100dvh; display:grid; place-items:center;
 }
 
+/* === Theme === */
+:root{
+  --bg:#0C1220;
+  --fg:#EAEAEA;
+  --acc:#ffb95f;            /* color de ROOM */
+  --panel:rgba(255,255,255,.06);
+  --panel-b:rgba(255,255,255,.12);
+}
+
+html{ font-family: var(--font-roboto), system-ui, -apple-system, Segoe UI, Arial, sans-serif; }
+*{ box-sizing:border-box }
+body{ margin:0; background:var(--bg); color:var(--fg); }
+
+/* === Hero === */
+.hero{
+  position:relative; min-height:100dvh; overflow:hidden;
+  display:grid; grid-template-rows:auto 1fr auto;
+}
+
+/* Fija tu fondo en /public/hero.jpg (captura del juego) */
+.hero__bg{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(1200px 600px at 70% 0%, rgba(0,0,0,.35), transparent 60%),
+    url("/hero.jpg") center/cover no-repeat;
+  filter:saturate(.9) contrast(1.05);
+  transform:scale(1.02);
+}
+.hero__overlay{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at center, rgba(12,18,32,.15) 0%, rgba(12,18,32,.65) 65%, rgba(12,18,32,.85) 100%),
+    linear-gradient(to top, rgba(12,18,32,.55), rgba(12,18,32,.15));
+  pointer-events:none;
+}
+
+/* Top bar minimal */
+.topbar{
+  position:relative; z-index:2;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 28px;
+}
+.brand{ text-decoration:none; letter-spacing:.5px }
+.brand-room{ color:var(--acc); font-weight:900; }
+.brand-176{ color:#fff; font-weight:900; margin-left:4px; }
+.nav a{
+  color:#cdd3e1; text-decoration:none; margin-left:20px; font-weight:500; opacity:.85;
+}
+.nav a:hover{ opacity:1 }
+
+/* Centro */
+.center{
+  position:relative; z-index:2;
+  display:grid; place-items:center; text-align:center; padding:24px;
+}
+.logo-xl{
+  margin:0;
+  font-size: clamp(48px, 9.5vw, 140px);
+  line-height: .9;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  text-shadow: 0 2px 22px rgba(0,0,0,.35);
+}
+.logo-xl .room{ color:var(--acc); font-weight:900 }
+.logo-xl .n176{ color:#fff; font-weight:900; margin-left:.12em }
+
+.tagline{
+  margin:16px 0 10px; opacity:.92;
+  font-size: clamp(16px, 2.2vw, 22px);
+}
+
+.pills{
+  display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+  margin-top:6px;
+}
+.pill{
+  padding:8px 12px; border-radius:999px; font-size:.9rem; font-weight:600;
+  background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(6px);
+}
+.pill--muted{ opacity:.75 }
+
+/* Footer */
+.footer{
+  position:relative; z-index:2; text-align:center; padding:16px; opacity:.7; font-size:.9rem;
+}
+
+/* Responsivo */
+@media (max-width: 640px){
+  .nav{ display:none; } /* nav opcional en móvil */
+}
+
 .wrap{ width:100%; padding:24px; }
 
 .card{
