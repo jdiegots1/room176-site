@@ -1,21 +1,4 @@
-:root{
-  --bg:#0C1220;
-  --fg:#EAEAEA;
-  --acc:#E5B22E;
-  --panel:rgba(255,255,255,.06);
-  --panel-b:rgba(255,255,255,.12);
-}
-
-/* Roboto auto-alojada vía next/font (usa la variable) */
-html{ font-family: var(--font-roboto), system-ui, -apple-system, Segoe UI, Arial, sans-serif; }
-*{ box-sizing:border-box }
-
-body{
-  margin:0; background:var(--bg); color:var(--fg);
-  min-height:100dvh; display:grid; place-items:center;
-}
-
-/* === Theme === */
+/* ===== Theme ===== */
 :root{
   --bg:#0C1220;
   --fg:#EAEAEA;
@@ -24,17 +7,20 @@ body{
   --panel-b:rgba(255,255,255,.12);
 }
 
+/* Roboto auto-alojada vía next/font (usa la variable) */
 html{ font-family: var(--font-roboto), system-ui, -apple-system, Segoe UI, Arial, sans-serif; }
 *{ box-sizing:border-box }
+
+/* Reset básico */
 body{ margin:0; background:var(--bg); color:var(--fg); }
 
-/* === Hero === */
+/* ===== Hero (home) ===== */
 .hero{
   position:relative; min-height:100dvh; overflow:hidden;
   display:grid; grid-template-rows:auto 1fr auto;
 }
 
-/* Fija tu fondo en /public/hero.jpg (captura del juego) */
+/* Fondo en /public/hero.jpg */
 .hero__bg{
   position:absolute; inset:0;
   background:
@@ -46,7 +32,7 @@ body{ margin:0; background:var(--bg); color:var(--fg); }
 .hero__overlay{
   position:absolute; inset:0;
   background:
-    radial-gradient(ellipse at center, rgba(12,18,32,.15) 0%, rgba(12,18,32,.65) 65%, rgba(12,18,32,.85) 100%),
+    radial-gradient(ellipse at center, rgba(12,18,32,.12) 0%, rgba(12,18,32,.65) 65%, rgba(12,18,32,.85) 100%),
     linear-gradient(to top, rgba(12,18,32,.55), rgba(12,18,32,.15));
   pointer-events:none;
 }
@@ -68,12 +54,12 @@ body{ margin:0; background:var(--bg); color:var(--fg); }
 /* Centro */
 .center{
   position:relative; z-index:2;
-  display:grid; place-items:center; text-align:center; padding:24px;
+  display:grid; place-items:center; text-align:center; padding:24px; gap:18px;
 }
 .logo-xl{
   margin:0;
-  font-size: clamp(48px, 9.5vw, 140px);
-  line-height: .9;
+  font-size: clamp(56px, 9.5vw, 140px);
+  line-height:.9;
   letter-spacing:.8px;
   text-transform:uppercase;
   text-shadow: 0 2px 22px rgba(0,0,0,.35);
@@ -86,9 +72,25 @@ body{ margin:0; background:var(--bg); color:var(--fg); }
   font-size: clamp(16px, 2.2vw, 22px);
 }
 
+/* Story card (texto narrativo) */
+.story{
+  max-width:min(980px, 92vw);
+  padding:28px 26px;
+  margin-inline:auto;
+  background:var(--panel);
+  border:1px solid var(--panel-b);
+  border-radius:16px;
+  backdrop-filter: blur(6px);
+  text-align:left;
+  line-height:1.7;
+  opacity:.96;
+}
+.story p{ margin:0 0 10px; }
+.story p:last-child{ margin-bottom:0; }
+
+/* Pills */
 .pills{
-  display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
-  margin-top:6px;
+  display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:6px;
 }
 .pill{
   padding:8px 12px; border-radius:999px; font-size:.9rem; font-weight:600;
@@ -102,30 +104,36 @@ body{ margin:0; background:var(--bg); color:var(--fg); }
   position:relative; z-index:2; text-align:center; padding:16px; opacity:.7; font-size:.9rem;
 }
 
+/* ===== Fade-in solo para título y texto ===== */
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(8px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+.fade-in{ opacity:0; animation: fadeUp .8s ease-out forwards; }
+.delay-0{ animation-delay: .05s; }
+.delay-1{ animation-delay: .25s; }
+
+/* Accesibilidad: reducir movimiento */
+@media (prefers-reduced-motion: reduce){
+  .fade-in{ animation:none; opacity:1; transform:none; }
+}
+
 /* Responsivo */
 @media (max-width: 640px){
   .nav{ display:none; } /* nav opcional en móvil */
 }
 
+/* ===== Utilidades que ya tenías (para otras páginas) ===== */
 .wrap{ width:100%; padding:24px; }
-
 .card{
-  max-width:820px;
-  margin-inline:auto;
-  padding:40px 32px;
-  background:var(--panel);
-  border:1px solid var(--panel-b);
-  border-radius:20px;
-  backdrop-filter: blur(8px);
+  max-width:820px; margin-inline:auto; padding:40px 32px;
+  background:var(--panel); border:1px solid var(--panel-b);
+  border-radius:20px; backdrop-filter: blur(8px);
 }
-
 h1{ margin:0 0 16px; font-weight:700; letter-spacing:.4px }
 p{ opacity:.92; line-height:1.7 }
-
 .btn{
-  display:inline-block; margin-top:20px;
-  padding:12px 18px; border-radius:10px;
+  display:inline-block; margin-top:20px; padding:12px 18px; border-radius:10px;
   background:var(--acc); color:#0C1220; text-decoration:none; font-weight:700;
 }
-
 footer{ margin-top:18px; text-align:center; opacity:.7; font-size:.9rem }
