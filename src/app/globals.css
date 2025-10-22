@@ -219,3 +219,84 @@ html { scroll-behavior: smooth; }
   opacity: .92;
 }
 
+/* PRÓXIMAMENTE — debajo del logo */
+.coming{
+  margin: 6px 0 2px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  font-size: clamp(14px, 2vw, 18px);
+  opacity: .9;
+}
+
+/* Efecto “reveal” con desenfoque al entrar en viewport */
+.reveal{
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(6px);
+  transition:
+    opacity .7s ease,
+    transform .7s ease,
+    filter .7s ease;
+}
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Versión minimal del texto (sin recuadro, centrado+justificado) */
+.story.story--myst{
+  max-width: min(980px, 92vw);
+  margin: 8px auto 0;
+  padding: 0 6px;
+  line-height: 1.85;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  backdrop-filter: none !important;
+  opacity: .98;
+}
+.story.story--myst p{ margin: 0 0 12px; }
+
+/* Contenedor y título de la sección */
+.about{
+  position: relative;
+  padding: 72px 24px 96px;
+  background:
+    radial-gradient(1200px 800px at 50% -10%, rgba(12,18,32,.28), rgba(12,18,32,0) 60%),
+    linear-gradient(to bottom, rgba(12,18,32,.88), rgba(12,18,32,.94));
+}
+.container{ max-width:1080px; margin:0 auto; }
+.about__title{
+  margin:0 0 16px; text-align:center;
+  font-weight:900; letter-spacing:.6px;
+  font-size: clamp(22px, 3.2vw, 32px);
+}
+
+/* Botón DEVLOG (tipo pill sin borde) */
+.about__cta{ display:flex; justify-content:center; margin-top:18px; }
+.devlog-btn{
+  display:inline-block;
+  padding:10px 16px;
+  border-radius:999px;
+  font-weight:800; letter-spacing:.04em;
+  text-decoration:none;
+  color:#0C1220;                      /* texto oscuro */
+  background: var(--acc);             /* mismo acento de ROOM (#ffb95f) */
+  border:none;                         /* sin borde */
+  box-shadow: 0 4px 22px rgba(0,0,0,.18);
+  transition: transform .12s ease, filter .12s ease, box-shadow .2s ease;
+}
+.devlog-btn:hover{ transform: translateY(1px); filter: brightness(1.04); }
+.devlog-btn:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
+
+/* Accesibilidad: menos movimiento */
+@media (prefers-reduced-motion: reduce){
+  .reveal{ transition: none; opacity:1; transform:none; filter:none; }
+}
