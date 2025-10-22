@@ -14,13 +14,14 @@ html{ font-family: var(--font-roboto), system-ui, -apple-system, Segoe UI, Arial
 /* Reset básico */
 body{ margin:0; background:var(--bg); color:var(--fg); }
 
-/* ===== Hero (home) ===== */
+/* ===== HERO: ocupa toda la pantalla y centra el logo EXACTAMENTE ===== */
 .hero{
-  position:relative; min-height:100dvh; overflow:hidden;
-  display:grid; grid-template-rows:auto 1fr auto;
+  position: relative;
+  height: 100svh;              /* altura real de viewport móvil/desktop */
+  overflow: hidden;
 }
 
-/* Fondo en /public/hero.jpg */
+/* Fondo y overlay */
 .hero__bg{
   position:absolute; inset:0;
   background:
@@ -37,85 +38,49 @@ body{ margin:0; background:var(--bg); color:var(--fg); }
   pointer-events:none;
 }
 
-/* Top bar minimal */
+/* Topbar flotante (no empuja contenido) */
 .topbar{
-  position:relative; z-index:2;
+  position:absolute; top:0; left:0; right:0; z-index:2;
   display:flex; align-items:center; justify-content:space-between;
   padding:20px 28px;
 }
 .brand{ text-decoration:none; letter-spacing:.5px }
 .brand-room{ color:var(--acc); font-weight:900; }
 .brand-176{ color:#fff; font-weight:900; margin-left:4px; }
-.nav a{
-  color:#cdd3e1; text-decoration:none; margin-left:20px; font-weight:500; opacity:.85;
-}
-.nav a:hover{ opacity:1 }
 
-/* Centro */
+/* Centro absoluto */
 .center{
   position:relative; z-index:2;
-  display:grid; place-items:center; text-align:center; padding:24px; gap:18px;
+  height: 100%;
+  display:grid; place-items:center;
+  text-align:center; padding:0 24px;
 }
+
+/* Footer flotando abajo (discreto) */
+.footer{
+  position:absolute; left:0; right:0; bottom:12px; z-index:2;
+  text-align:center; opacity:.7; font-size:.9rem;
+}
+
+/* Logo y PRÓXIMAMENTE */
 .logo-xl{
   margin:0;
   font-size: clamp(56px, 9.5vw, 140px);
-  line-height:.9;
-  letter-spacing:.8px;
-  text-transform:uppercase;
-  text-shadow: 0 2px 22px rgba(0,0,0,.35);
+  line-height:.9; letter-spacing:.8px; text-transform:uppercase;
+  text-shadow:0 2px 22px rgba(0,0,0,.35);
 }
-.logo-xl .room{ color:var(--acc); font-weight:900 }
-.logo-xl .n176{ color:#fff; font-weight:900; margin-left:.12em }
+.logo-xl .room{ color:var(--acc); font-weight:900; }
+.logo-xl .n176{ color:#fff; font-weight:900; margin-left:.12em; }
 
-.tagline{
-  margin:16px 0 10px; opacity:.92;
-  font-size: clamp(16px, 2.2vw, 22px);
-}
-
-/* Story (centrado y justificado, sin recuadro) */
-.story{
-  max-width: min(980px, 92vw);
-  margin: 0 auto;              /* centra el bloque en la página */
-  padding: 0 6px;              /* un pelín de aire lateral */
-  line-height: 1.8;
-  text-align: justify;         /* justifica el texto */
-  text-justify: inter-word;    /* mejor distribución de espacios */
-  hyphens: auto;               /* guiones automáticos donde aplique */
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-
-  /* limpiamos cualquier estilo de “caja” previo */
-  background: none !important;
-  border: none !important;
-  border-radius: 0 !important;
-  backdrop-filter: none !important;
-  opacity: .96;
+.coming{
+  margin:6px 0 2px;
+  font-weight:800;
+  letter-spacing:.12em;
+  font-size:clamp(14px, 2vw, 18px);
+  opacity:.9;
 }
 
-.story p{
-  margin: 0 0 12px;
-}
-.story p:last-child{
-  margin-bottom: 0;
-}
-
-/* Pills */
-.pills{
-  display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:6px;
-}
-.pill{
-  padding:8px 12px; border-radius:999px; font-size:.9rem; font-weight:600;
-  background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14);
-  backdrop-filter: blur(6px);
-}
-.pill--muted{ opacity:.75 }
-
-/* Footer */
-.footer{
-  position:relative; z-index:2; text-align:center; padding:16px; opacity:.7; font-size:.9rem;
-}
-
-/* fade-in ya existente; lo reutilizamos para cada cambio (key=index) */
+/* ===== Animaciones ===== */
 @keyframes fadeUp {
   from { opacity:0; transform: translateY(6px); }
   to   { opacity:1; transform: translateY(0); }
@@ -124,127 +89,37 @@ body{ margin:0; background:var(--bg); color:var(--fg); }
 .delay-0{ animation-delay: .05s; }
 .delay-1{ animation-delay: .25s; }
 
-/* opcional: transición aún más sutil para el teaser (extra) */
-@media (prefers-reduced-motion: no-preference){
-  .teaser { transition: opacity .5s ease; }
-}
 /* Accesibilidad: reducir movimiento */
 @media (prefers-reduced-motion: reduce){
   .fade-in{ animation:none; opacity:1; transform:none; }
 }
 
-/* Responsivo */
-@media (max-width: 640px){
-  .nav{ display:none; } /* nav opcional en móvil */
-}
-
-/* ===== Utilidades que ya tenías (para otras páginas) ===== */
-.wrap{ width:100%; padding:24px; }
-.card{
-  max-width:820px; margin-inline:auto; padding:40px 32px;
-  background:var(--panel); border:1px solid var(--panel-b);
-  border-radius:20px; backdrop-filter: blur(8px);
-}
-h1{ margin:0 0 16px; font-weight:700; letter-spacing:.4px }
-p{ opacity:.92; line-height:1.7 }
-.btn{
-  display:inline-block; margin-top:20px; padding:12px 18px; border-radius:10px;
-  background:var(--acc); color:#0C1220; text-decoration:none; font-weight:700;
-}
-footer{ margin-top:18px; text-align:center; opacity:.7; font-size:.9rem }
-
-/* Scroll suave entre anclas */
-html { scroll-behavior: smooth; }
-
-/* Botón de flecha hacia abajo */
-.scroll-down{
-  margin-top: 10px;
-  display:inline-grid; place-items:center;
-  width:46px; height:46px;
-  border-radius:999px;
-  color:#fff; background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.18);
-  text-decoration:none; opacity:.85;
-  transition: transform .15s ease, opacity .15s ease, background .15s ease;
-}
-.scroll-down:hover{ opacity:1; background:rgba(255,255,255,.14); transform: translateY(1px); }
-.scroll-down:focus-visible{ outline:2px solid var(--acc); outline-offset:2px; }
-
-/* Pequeña animación de “latido” a la flecha */
-@keyframes nudge {
-  0%,100% { transform: translateY(0); }
-  50%     { transform: translateY(3px); }
-}
-.scroll-down svg{ animation: nudge 1.6s ease-in-out infinite; }
-@media (prefers-reduced-motion: reduce){
-  .scroll-down svg{ animation:none; }
-}
-
-/* Sección ¿QUÉ ES ROOM176? */
+/* ===== Sección inferior: ¿QUÉ ES ROOM176? ===== */
 .about{
   position: relative;
   padding: 72px 24px 96px;
   background:
     radial-gradient(1200px 800px at 50% -10%, rgba(12,18,32,.28), rgba(12,18,32,0) 60%),
-    linear-gradient(to bottom, rgba(12,18,32,.85), rgba(12,18,32,.92));
-}
-.container{
-  max-width: 1080px;
-  margin: 0 auto;
-}
-.about__title{
-  margin: 0 0 18px;
-  text-align: center;
-  font-weight: 900;
-  letter-spacing: .6px;
-  font-size: clamp(22px, 3.2vw, 32px);
-  color: #fff;
+    linear-gradient(to bottom, rgba(12,18,32,.88), rgba(12,18,32,.94));
 }
 
-/* La “story” ya la tienes centrada y justificada.
-   Aseguramos un pequeño ajuste para esta sección larga. */
-.about .story{
-  margin-top: 8px;
-  opacity: .98;
-}
-
-/* Mejor anclaje al hacer scroll (si tienes topbar fija, ajusta el margen) */
-#about{ scroll-margin-top: 80px; }
-
-/* teaser minimal (sin recuadro, centrado) */
-.teaser{
-  margin: 6px 0 2px;
-  font-size: clamp(16px, 2.2vw, 22px);
-  letter-spacing: .2px;
-  opacity: .92;
-}
-
-/* PRÓXIMAMENTE — debajo del logo */
-.coming{
-  margin: 6px 0 2px;
-  font-weight: 800;
-  letter-spacing: .12em;
-  font-size: clamp(14px, 2vw, 18px);
-  opacity: .9;
-}
-
-/* Efecto “reveal” con desenfoque al entrar en viewport */
+/* Reveal al entrar en viewport */
 .reveal{
-  opacity: 0;
-  transform: translateY(10px);
-  filter: blur(6px);
-  transition:
-    opacity .7s ease,
-    transform .7s ease,
-    filter .7s ease;
+  opacity:0; transform:translateY(10px); filter:blur(6px);
+  transition: opacity .7s ease, transform .7s ease, filter .7s ease;
 }
 .reveal.is-visible{
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
+  opacity:1; transform:translateY(0); filter:blur(0);
 }
 
-/* Versión minimal del texto (sin recuadro, centrado+justificado) */
+.container{ max-width:1080px; margin:0 auto; }
+.about__title{
+  margin:0 0 16px; text-align:center;
+  font-weight:900; letter-spacing:.6px;
+  font-size: clamp(22px, 3.2vw, 32px);
+}
+
+/* Texto minimal, centrado y justificado; sin recuadro */
 .story.story--myst{
   max-width: min(980px, 92vw);
   margin: 8px auto 0;
@@ -252,10 +127,7 @@ html { scroll-behavior: smooth; }
   line-height: 1.85;
   text-align: justify;
   text-justify: inter-word;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-
+  hyphens: auto; -webkit-hyphens: auto; -ms-hyphens: auto;
   background: none !important;
   border: none !important;
   border-radius: 0 !important;
@@ -264,22 +136,7 @@ html { scroll-behavior: smooth; }
 }
 .story.story--myst p{ margin: 0 0 12px; }
 
-/* Contenedor y título de la sección */
-.about{
-  position: relative;
-  padding: 72px 24px 96px;
-  background:
-    radial-gradient(1200px 800px at 50% -10%, rgba(12,18,32,.28), rgba(12,18,32,0) 60%),
-    linear-gradient(to bottom, rgba(12,18,32,.88), rgba(12,18,32,.94));
-}
-.container{ max-width:1080px; margin:0 auto; }
-.about__title{
-  margin:0 0 16px; text-align:center;
-  font-weight:900; letter-spacing:.6px;
-  font-size: clamp(22px, 3.2vw, 32px);
-}
-
-/* Botón DEVLOG (tipo pill sin borde) */
+/* Botón DEVLOG (pill sin borde) */
 .about__cta{ display:flex; justify-content:center; margin-top:18px; }
 .devlog-btn{
   display:inline-block;
@@ -287,16 +144,29 @@ html { scroll-behavior: smooth; }
   border-radius:999px;
   font-weight:800; letter-spacing:.04em;
   text-decoration:none;
-  color:#0C1220;                      /* texto oscuro */
-  background: var(--acc);             /* mismo acento de ROOM (#ffb95f) */
-  border:none;                         /* sin borde */
+  color:#0C1220;                /* texto oscuro */
+  background: var(--acc);       /* mismo acento de ROOM (#ffb95f) */
+  border:none;
   box-shadow: 0 4px 22px rgba(0,0,0,.18);
   transition: transform .12s ease, filter .12s ease, box-shadow .2s ease;
 }
 .devlog-btn:hover{ transform: translateY(1px); filter: brightness(1.04); }
 .devlog-btn:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
 
-/* Accesibilidad: menos movimiento */
-@media (prefers-reduced-motion: reduce){
-  .reveal{ transition: none; opacity:1; transform:none; filter:none; }
+/* ===== Utilidades (otras páginas) ===== */
+.wrap{ width:100%; padding:24px; }
+.card{
+  max-width:820px; margin-inline:auto; padding:40px 32px;
+  background:var(--panel); border:1px solid var(--panel-b);
+  border-radius:20px; backdrop-filter: blur(8px);
+}
+h1{ margin:0 0 16px; font-weight:700; letter-spacing:.4px; }
+p{ opacity:.92; line-height:1.7; }
+
+/* Scroll suave entre anclas */
+html { scroll-behavior: smooth; }
+
+/* Nav móvil (opcional) */
+@media (max-width: 640px){
+  .nav{ display:none; }
 }
