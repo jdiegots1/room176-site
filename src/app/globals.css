@@ -148,3 +148,61 @@ p{ opacity:.92; line-height:1.7 }
   background:var(--acc); color:#0C1220; text-decoration:none; font-weight:700;
 }
 footer{ margin-top:18px; text-align:center; opacity:.7; font-size:.9rem }
+
+/* Scroll suave entre anclas */
+html { scroll-behavior: smooth; }
+
+/* Botón de flecha hacia abajo */
+.scroll-down{
+  margin-top: 10px;
+  display:inline-grid; place-items:center;
+  width:46px; height:46px;
+  border-radius:999px;
+  color:#fff; background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.18);
+  text-decoration:none; opacity:.85;
+  transition: transform .15s ease, opacity .15s ease, background .15s ease;
+}
+.scroll-down:hover{ opacity:1; background:rgba(255,255,255,.14); transform: translateY(1px); }
+.scroll-down:focus-visible{ outline:2px solid var(--acc); outline-offset:2px; }
+
+/* Pequeña animación de “latido” a la flecha */
+@keyframes nudge {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(3px); }
+}
+.scroll-down svg{ animation: nudge 1.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce){
+  .scroll-down svg{ animation:none; }
+}
+
+/* Sección ¿QUÉ ES ROOM176? */
+.about{
+  position: relative;
+  padding: 72px 24px 96px;
+  background:
+    radial-gradient(1200px 800px at 50% -10%, rgba(12,18,32,.28), rgba(12,18,32,0) 60%),
+    linear-gradient(to bottom, rgba(12,18,32,.85), rgba(12,18,32,.92));
+}
+.container{
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.about__title{
+  margin: 0 0 18px;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: .6px;
+  font-size: clamp(22px, 3.2vw, 32px);
+  color: #fff;
+}
+
+/* La “story” ya la tienes centrada y justificada.
+   Aseguramos un pequeño ajuste para esta sección larga. */
+.about .story{
+  margin-top: 8px;
+  opacity: .98;
+}
+
+/* Mejor anclaje al hacer scroll (si tienes topbar fija, ajusta el margen) */
+#about{ scroll-margin-top: 80px; }
